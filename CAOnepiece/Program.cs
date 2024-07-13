@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using CAOnepiece.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<CAOnepieceContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CAOnepieceContext") ?? throw new InvalidOperationException("Connection string 'CAOnepieceContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
