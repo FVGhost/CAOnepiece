@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CAOnepiece.Data;
+using MvcMovie.Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CAOnepieceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CAOnepieceContext") ?? throw new InvalidOperationException("Connection string 'CAOnepieceContext' not found.")));
@@ -9,6 +10,13 @@ builder.Services.AddDbContext<CAOnepieceContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
