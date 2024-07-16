@@ -20,11 +20,7 @@ namespace CAOnepiece.Controllers
         }
 
         // GET: Fruits
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Fruit.ToListAsync());
-        }
-
+    
         // GET: Fruits/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -132,6 +128,25 @@ namespace CAOnepiece.Controllers
             }
 
             return View(fruit);
+        }
+
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            if (_context.Fruit == null)
+            {
+                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+            }
+
+            var df = from m in _context.Fruit
+                     select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                df = df.Where(s => s.Name!.Contains(searchString));
+            }
+
+            return View(await df.ToListAsync());
         }
 
         // POST: Fruits/Delete/5

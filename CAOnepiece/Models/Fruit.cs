@@ -1,4 +1,7 @@
-﻿namespace CAOnepiece.Models
+﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CAOnepiece.Models
 {
     public class Fruit
     {
@@ -6,6 +9,7 @@
         public string Name { get; set; }
         public string type { get; set; }
         public string Description { get; set; }
+
         public decimal Price { get; set; }
        
     }
