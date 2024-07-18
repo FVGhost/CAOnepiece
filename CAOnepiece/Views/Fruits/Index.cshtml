@@ -1,69 +1,191 @@
 ﻿@model CAOnepiece.Models.FruitTypeViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Power Fruits";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; 
+        }
 
-<form asp-controller="Fruits" asp-action="Index" method="get">
-    <p>
-        <select asp-for="FruitType" asp-items="Model.Type">
-            <option value="">All</option>
-        </select>
+        
+        header {
+            background: linear-gradient(to right, #ff6f61, #ff8e53); 
+            color: white; 
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-        Title: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
+            header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fruits![0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fruits![0].type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fruits![0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fruits![0].Price)
-            <th>
-                    @Html.DisplayNameFor(model => model.Fruits![0].Rating)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Fruits!) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
-                </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            header p {
+                font-size: 1.2rem;
+                margin: 0;
+            }
+
+    
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+            .table th,
+            .table td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .table th {
+                background-color: #f8f9fa; 
+                color: #495057; 
+                font-weight: bold;
+                border-top: 2px solid #dee2e6;
+            }
+
+            .table td {
+                vertical-align: middle;
+            }
+
+     
+        .btn {
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 4px; 
+            text-decoration: none; 
+            cursor: pointer; 
+            transition: background-color 0.3s ease, transform 0.2s ease; 
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            user-select: none;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            background: linear-gradient(to right, #ff6f61, #ff8e53); 
+            overflow: hidden; 
+            position: relative; 
+        }
+
+            .btn:hover {
+                background: linear-gradient(to right, #ff6f61, #ff8e53); 
+                transform: translateY(-2px); 
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+            }
+
+            .btn:active {
+                transform: translateY(0); 
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            }
+
+        .btn-secondary {
+            background-color: #6c757d; 
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268; 
+            }
+
+        .btn-danger {
+            background-color: #dc3545; 
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333; 
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Power Fruits</h1>
+            <p>
+                <a asp-action="Create" class="btn btn-primary">Create New</a>
+            </p>
+            <form asp-controller="Fruits" asp-action="Index" method="get">
+                <p>
+                    <select asp-for="FruitType" asp-items="Model.Type">
+                        <option value="">All</option>
+                    </select>
+                    Title: <input type="text" asp-for="SearchString" />
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </p>
+            </form>
+        </div>
+    </header>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fruits![0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fruits![0].type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fruits![0].Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fruits![0].Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fruits![0].Rating)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Fruits!)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rating)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

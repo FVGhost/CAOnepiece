@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,7 +10,138 @@
     <title>@ViewData["Title"] - CAOnepiece App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CAOnepiece.styles.css" asp-append-version="true" />
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f3f3;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(45deg, #ff6f61, #ff8e53);
+            color: white;
+            text-align: center;
+            padding: 3rem 0; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem; 
+        }
+
+            header h1 {
+                margin: 0;
+                font-size: 3rem;
+                font-weight: bold;
+            }
+
+            header p {
+                margin: 1rem 0 0;
+                font-size: 1.2rem;
+            }
+
+            header a {
+                color: #f7f7f7;
+                text-decoration: none;
+            }
+
+                header a:hover {
+                    text-decoration: underline;
+                }
+
+        
+        main {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            margin: 2rem 0;
+            width: 80%;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            border-bottom: 2px solid #ff6f61;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+            ul li {
+                margin-bottom: 0.5rem;
+                position: relative;
+                padding-left: 1.5rem;
+            }
+
+                ul li:before {
+                    content: "•";
+                    color: #ff6f61;
+                    font-weight: bold;
+                    display: inline-block;
+                    width: 1rem;
+                    margin-left: -1rem;
+                }
+
+        
+        .navbar {
+            background-color: #fff; 
+            border-bottom: 1px solid #ccc; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            color: #333; 
+        }
+
+        .navbar-nav .nav-item {
+            margin-right: 10px; 
+        }
+
+        .navbar-nav .nav-link {
+            color: #333; 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+            position: relative;
+            padding: 0.5rem 1rem; 
+            border-radius: 4px; 
+            transition: background-color 0.3s ease; 
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #fff; 
+                background-color: #ff6f61; 
+            }
+
+        .navbar-toggler {
+            border-color: #333;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #333; 
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,7 +158,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Fruits" asp-action="Index">Fruits</a>
                         </li>
                     </ul>
                 </div>

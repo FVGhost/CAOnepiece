@@ -49,7 +49,7 @@ namespace CAOnepiece.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fruit");
+                    b.ToTable("Fruit", (string)null);
                 });
 #pragma warning restore 612, 618
         }

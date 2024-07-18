@@ -12,10 +12,10 @@ public static class SeedData
             serviceProvider.GetRequiredService<
                 DbContextOptions<CAOnepieceContext>>()))
         {
-            // Look for any movies.
+            
             if (context.Fruit.Any())
             {
-                return;   // DB has been seeded
+                return;   
             }
             context.Fruit.AddRange(
                 new Fruit
