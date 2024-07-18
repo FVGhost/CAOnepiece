@@ -50,7 +50,7 @@ namespace CAOnepiece.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,type,Description,Price")] Fruit fruit)
+        public async Task<IActionResult> Create([Bind("Id,Name,type,Description,Price,Rating")] Fruit fruit)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace CAOnepiece.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,type,Description,Price")] Fruit fruit)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,type,Description,Price,Rating")] Fruit fruit)
         {
             if (id != fruit.Id)
             {
@@ -131,22 +131,37 @@ namespace CAOnepiece.Controllers
         }
 
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string fruittype, string searchString)
         {
             if (_context.Fruit == null)
             {
                 return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
             }
 
-            var df = from m in _context.Fruit
-                     select m;
+            // Use LINQ to get list of genres.
+            IQueryable<string> genreQuery = from m in _context.Fruit
+                                            orderby m.type
+                                            select m.type;
+            var fruits = from m in _context.Fruit
+                         select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                df = df.Where(s => s.Name!.Contains(searchString));
+                fruits = fruits.Where(s => s.Name!.Contains(searchString));
             }
 
-            return View(await df.ToListAsync());
+            if (!string.IsNullOrEmpty(fruittype))
+            {
+                fruits = fruits.Where(x => x.type == fruittype);
+            }
+
+            var FruittypeVm = new FruitTypeViewModel
+            {
+                Type = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Fruits = await fruits.ToListAsync()
+            };
+
+            return View(FruittypeVm);
         }
 
         // POST: Fruits/Delete/5
