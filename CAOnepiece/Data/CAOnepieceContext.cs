@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CAOnepiece.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CAOnepiece.Data
 {
-    public class CAOnepieceContext : DbContext
+    public class CAOnepieceContext : IdentityDbContext<CAOnepieceUser>
     {
         public CAOnepieceContext (DbContextOptions<CAOnepieceContext> options)
             : base(options)

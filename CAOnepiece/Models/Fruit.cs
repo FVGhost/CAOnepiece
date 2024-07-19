@@ -11,7 +11,6 @@ namespace CAOnepiece.Models
         [StringLength(60, MinimumLength = 3)]
         [Required]
         public string Name { get; set; }
-        [DataType(DataType.Date)]
         [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [Required]
         [StringLength(30)]
@@ -23,7 +22,7 @@ namespace CAOnepiece.Models
         public decimal Price { get; set; }
 
         [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$")]
-        [StringLength(5)]
+        [StringLength(50)]
         [Required]
         public string? Rating { get; set; }
 
