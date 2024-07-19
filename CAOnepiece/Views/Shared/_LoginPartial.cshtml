@@ -8,7 +8,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Welcome @UserManager.GetUserName(User)!</a>
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -26,3 +26,47 @@ else
     </li>
 }
 </ul>
+<style>
+    .navbar-nav {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item {
+        margin-right: 1rem;
+    }
+
+    .nav-link {
+        color: #333;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+    }
+
+        .nav-link:hover {
+            color: #ff7e5f;
+        }
+
+        .nav-link.btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+            border: none;
+        }
+
+            .nav-link.btn:hover {
+                background: linear-gradient(to right, #feb47b, #ff7e5f);
+            }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+    }
+
+    #logoutForm {
+        margin: 0;
+    }
+</style>
