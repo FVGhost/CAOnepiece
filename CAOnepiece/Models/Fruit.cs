@@ -10,12 +10,12 @@ namespace CAOnepiece.Models
 
         [StringLength(60, MinimumLength = 3)]
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [Required]
         [StringLength(30)]
-        public string type { get; set; }
-        public string Description { get; set; }
+        public string? type { get; set; }
+        public string? Description { get; set; }
 
         [Range(1, 100)]
         [DataType(DataType.Currency)]
