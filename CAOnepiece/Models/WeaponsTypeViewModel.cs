@@ -2,11 +2,11 @@
 
 namespace CAOnepiece.Models
 {
-    public class FruitTypeViewModel
+    public class WeaponsTypeViewModel
     {
-        public List<Fruit>? Fruits { get; set; }
+        public List<Weapon>? weapons { get; set; }
         public SelectList? Type { get; set; }
-        public string? FruitType { get; set; }
+        public string? WeaponType { get; set; }
         public string? SearchString { get; set; }
     }
 

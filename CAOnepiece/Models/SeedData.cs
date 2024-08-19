@@ -61,21 +61,15 @@ public static class SeedData
                 DbContextOptions<CAOnepieceContext>>()))
         {
 
-            if (context.Bosses.Any())
+            if (context.Boss.Any())
             {
                 return;
             }
-            context.Bosses.AddRange(
-                new Boss
-                {
-                    BossName = "Ryu",
-                    Description = "",
-
-                },
+            context.Boss.AddRange(
             new Boss
             {
                 Id = 1,
-                BossName = "Gomu Gomu No Mi",
+                BossName = "Ryu",
                 Description = "is a swordsman boss and spawns at Ryu's Palace, on Fishman Island. He uses 1 Sword Style and is equipped with his personal sword",
 
             },

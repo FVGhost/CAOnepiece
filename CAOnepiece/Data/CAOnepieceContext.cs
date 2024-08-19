@@ -17,7 +17,7 @@ namespace CAOnepiece.Data
 
         public DbSet<CAOnepiece.Models.Fruit> Fruit { get; set; } = default!;
         public DbSet<CAOnepiece.Models.Weapon> Weapons { get; set; } = default!;
-        public DbSet<CAOnepiece.Models.Boss> Bosses { get; set; } = default!;
+        public DbSet<CAOnepiece.Models.Boss> Boss { get; set; } = default!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace CAOnepiece.Data
             modelBuilder.Entity<Weapon>()
                 .HasOne(w => w.Boss)
                 .WithMany(b => b.Weapons)
-                .HasForeignKey(w => w.BossId);
+               .HasForeignKey(w => w.BossId);
 
 
         }
