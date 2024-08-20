@@ -68,28 +68,28 @@ public static class SeedData
             context.Boss.AddRange(
             new Boss
             {
-                Id = 1,
+               
                 BossName = "Ryu",
                 Description = "is a swordsman boss and spawns at Ryu's Palace, on Fishman Island. He uses 1 Sword Style and is equipped with his personal sword",
 
             },
         new Boss
         {
-            Id = 2,
+           
             BossName = "Neptune",
             Description = "is the main boss located at Fishman Island, in order to get to Fishman Island you need to follow the maze through Fishman Cave. Neptune has 2 drops",
 
         },
                 new Boss
                 {
-                    Id = 3,
+                    
                     BossName = "Whitebeard",
                     Description = "Sea boss and is dormant at Marine Base G-1. He uses the Gura Gura no Mi and is equipped with Bisento and his personal cape.",
 
                 },
                      new Boss
                      {
-                         Id = 4,
+                         
                          BossName = "Crab King Cho",
                          Description = "The boss has 6,000 HP (per player), however, it passively negates a whopping 50% of all damage," +
                          " thus duplicating it's health. Additionally, when his health is reduced to half or lower, he will start slowly healing." +

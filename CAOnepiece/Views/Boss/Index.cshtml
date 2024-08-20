@@ -116,11 +116,11 @@
 <body>
     <header>
         <div class="container">
-            <h1>Power Fruits</h1>
+            <h1>Bosses</h1>
             <p>
                 <a asp-action="Create" class="btn btn-primary">Create New</a>
             </p>
-            <form asp-controller="Fruits" asp-action="Index" method="get">
+            <form asp-controller="Boss" asp-action="Index" method="get">
                 <p>
                     <select asp-for="BossType" asp-items="Model.Type">
                         <option value="">All</option>
