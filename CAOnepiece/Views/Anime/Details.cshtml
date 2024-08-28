@@ -1,0 +1,14 @@
+﻿@model AnimeInfoApp.Models.Anime
+
+<div class="container">
+    <h1>@Model.Title</h1>
+    <img src="@Model.ImageUrl" alt="@Model.Title" />
+    <p><strong>Synopsis:</strong> @Model.Synopsis</p>
+    <p><strong>Type:</strong> @Model.Type</p>
+    <p><strong>Episodes:</strong> @Model.Episodes</p>
+    <p><strong>Status:</strong> @Model.Status</p>
+    <p><strong>Score:</strong> @Model.Score</p>
+    <p><strong>Members:</strong> @Model.Members</p>
+    <p><strong>Aired:</strong> @Model.AiredFrom?.ToString("yyyy-MM-dd") to @Model.AiredTo?.ToString("yyyy-MM-dd")</p>
+    <p><a href="@Model.Url">More Information</a></p>
+</div>
