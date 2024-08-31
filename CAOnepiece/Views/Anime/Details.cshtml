@@ -1,5 +1,95 @@
 ﻿@model AnimeInfoApp.Models.Anime
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-color: #ff6f61; 
+        overflow: hidden;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+        .navbar a {
+            float: left;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+            transition: background-color 0.3s;
+        }
+
+            .navbar a:hover {
+                background-color: #ff8e53; 
+            }
+
+    .container {
+        background-color: #ff6f61; 
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        margin: 80px auto; 
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px; 
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #ffffff; 
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+        border-radius: 8px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #ffffff;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+        p strong {
+            color: #000000; 
+        }
+
+    a.button {
+        display: inline-block;
+        text-decoration: none;
+        color: #ffffff; 
+        background-color: #ff8e53;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        text-align: center;
+    }
+
+        a.button:hover {
+            background-color: #ff6f61; 
+        }
+</style>
+
+
+
 <div class="container">
     <h1>@Model.Title</h1>
     <img src="@Model.ImageUrl" alt="@Model.Title" />
@@ -10,5 +100,5 @@
     <p><strong>Score:</strong> @Model.Score</p>
     <p><strong>Members:</strong> @Model.Members</p>
     <p><strong>Aired:</strong> @Model.AiredFrom?.ToString("yyyy-MM-dd") to @Model.AiredTo?.ToString("yyyy-MM-dd")</p>
-    <p><a href="@Model.Url">More Information</a></p>
+    <p><a href="@Model.Url" class="button">More Information</a></p>
 </div>

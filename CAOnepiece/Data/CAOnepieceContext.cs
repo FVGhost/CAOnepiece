@@ -24,7 +24,7 @@ namespace CAOnepiece.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure the relationship between Weapons and Bosses
+            
             modelBuilder.Entity<Weapon>()
                 .HasOne(w => w.Boss)
                 .WithMany(b => b.Weapons)

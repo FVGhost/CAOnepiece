@@ -1,7 +1,9 @@
 ﻿using AnimeInfoApp.Models;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using AnimeInfoApp.Services;
 
 namespace AnimeInfoApp.Services
 {
@@ -19,7 +21,18 @@ namespace AnimeInfoApp.Services
         public async Task<Anime> GetAnimeAsync(int id)
         {
             var requestUrl = $"https://api.jikan.moe/v4/anime/{id}/full";
-            var response = await _httpClient.GetAsync(requestUrl);
+            _logger.LogInformation("Requesting data from URL: {RequestUrl}", requestUrl);
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await _httpClient.GetAsync(requestUrl);
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError("HTTP Request Error: {ExceptionMessage}", ex.Message);
+                return CreateFallbackAnime();
+            }
 
             if (!response.IsSuccessStatusCode)
             {
@@ -44,13 +57,14 @@ namespace AnimeInfoApp.Services
                     AiredFrom = GetDateTimeProperty(animeJson, "aired", "from"),
                     AiredTo = GetDateTimeProperty(animeJson, "aired", "to"),
                     Type = GetStringProperty(animeJson, "type"),
-                    Episodes = animeJson.GetProperty("episodes").GetInt32(),
-                    Status = GetStringProperty(animeJson, "status"),
-                    Score = animeJson.GetProperty("score").GetDouble(),
-                    Members = animeJson.GetProperty("members").GetInt32(),
+                   Episodes = GetNullableIntProperty(animeJson, "episodes"),
+                    Status = GetStringtatusProperty(animeJson, "status"),
+                    Score = GetNullableDoubleProperty(animeJson, "score"),
+                    Members = (int)GetNullableIntProperty(animeJson, "members"),
                     Url = GetStringProperty(animeJson, "url")
                 };
 
+                _logger.LogInformation("Parsed Anime Data: {@Anime}", anime);
                 return anime;
             }
             catch (JsonException ex)
@@ -69,15 +83,83 @@ namespace AnimeInfoApp.Services
         {
             return jsonElement.TryGetProperty(propertyName, out var prop) ? prop.GetString() ?? string.Empty : string.Empty;
         }
+        private string GetStringtatusProperty(JsonElement jsonElement, string propertyName)
+        {
+         
+            if (jsonElement.TryGetProperty(propertyName, out var prop))
+            {
+               
+                if (prop.ValueKind == JsonValueKind.String)
+                {
+                    return prop.GetString() ?? string.Empty;
+                }
+              
+                else
+                {
+   
+                    return string.Empty;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        private int? GetNullableIntProperty(JsonElement jsonElement, string propertyName)
+        {
+         
+            if (jsonElement.TryGetProperty(propertyName, out var prop))
+            {
+             
+                switch (prop.ValueKind)
+                {
+                    case JsonValueKind.Number:
+               
+                        if (prop.TryGetInt32(out var intValue))
+                        {
+                            return intValue;
+                        }
+                        break;
+                    case JsonValueKind.Null:
+                      
+                        return null;
+                }
+            }
+
+           
+            return null;
+        }
+
+
+        private double GetNullableDoubleProperty(JsonElement jsonElement, string propertyName)
+        {
+            return jsonElement.TryGetProperty(propertyName, out var prop) && prop.TryGetDouble(out var value) ? value : 0.0;
+        }
 
         private DateTime? GetDateTimeProperty(JsonElement jsonElement, string parentPropertyName, string datePropertyName)
         {
-            return jsonElement.TryGetProperty(parentPropertyName, out var parentProp) &&
-                   parentProp.TryGetProperty(datePropertyName, out var dateProp) &&
-                   dateProp.TryGetDateTime(out var dateTime)
-                ? dateTime
-                : (DateTime?)null;
+            if (jsonElement.TryGetProperty(parentPropertyName, out var parentProp))
+            {
+                if (parentProp.ValueKind == JsonValueKind.Object &&
+                    parentProp.TryGetProperty(datePropertyName, out var dateProp))
+                {
+                   
+                    if (dateProp.ValueKind == JsonValueKind.String &&
+                        DateTime.TryParse(dateProp.GetString(), out var dateTime))
+                    {
+                        return dateTime;
+                    }
+                    else if (dateProp.ValueKind == JsonValueKind.Null)
+                    {
+                 
+                        return null;
+                    }
+                }
+            }
+
+           
+            return null;
         }
+
 
         private string GetImageUrlProperty(JsonElement jsonElement)
         {
